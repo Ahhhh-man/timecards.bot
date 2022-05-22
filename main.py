@@ -1,5 +1,6 @@
 import os, discord, asyncio
 from clients.bot import Bot
+from active import active
 
 async def main():
     from dotenv import load_dotenv
@@ -17,4 +18,5 @@ async def main():
         await bot.start(TOKEN)
 
 if __name__ == '__main__':
+    active()
     asyncio.run(main())
