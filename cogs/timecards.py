@@ -1,9 +1,6 @@
 from discord.ext import commands, tasks
-
-import os
-
+import os, discord
 from datetime import datetime
-import random
 
 
 class Timecards(commands.Cog):
@@ -31,10 +28,20 @@ class Timecards(commands.Cog):
         if datetime.now().hour == 17:
             for guild in self.bot.guilds:
                 if guild.system_channel is not None:
-                    await guild.system_channel.send(f"@everyone Time for timecards! {self.url}")
+
+                    timecards_url = os.environ.get('TIMECARD_URL')
+
+                    view = discord.ui.View()
+                    item = discord.ui.Button(style=discord.ButtonStyle.gray, label="Link", url=timecards_url)
+                    view.add_item(item=item)
+
+                    await guild.system_channel.send("@everyone **Timecard Reminder!**", view=view)
 
     @commands.Cog.listener()
     async def on_ready(self):
         self.minute_finder.start()
         self.test.start()
 
+
+async def setup(bot):
+    await bot.add_cog(Timecards(bot))

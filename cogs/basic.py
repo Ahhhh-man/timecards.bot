@@ -1,8 +1,7 @@
-import discord
 from discord.ext import commands
-import random
+import discord, os, random
 
-class Basic(discord.ext.commands.Cog, name='Basic module'):
+class Basic(commands.Cog, name='Basic module'):
     def __init__(self, bot):
         self.bot = bot
 
@@ -19,3 +18,7 @@ class Basic(discord.ext.commands.Cog, name='Basic module'):
         channel = member.guild.system_channel
         if channel is not None:
             await channel.send(f'A wild {member.mention} has appeared!')
+
+
+async def setup(bot):
+    await bot.add_cog(Basic(bot))
