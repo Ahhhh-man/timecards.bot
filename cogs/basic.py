@@ -1,18 +1,27 @@
 from discord.ext import commands
-import discord, os, random
+import discord
+import os
+import random
+
 
 class Basic(commands.Cog, name='Basic module'):
     def __init__(self, bot):
         self.bot = bot
+        self.last_user = None
 
     @commands.command(name="hey")
-    async def adhoc_play(self, ctx):
-        await ctx.send(f'Hey {ctx.author.name}')
-    
+    async def hey(self, ctx):
+        if ctx.author == self.last_user:
+            await ctx.send("Hey again!")
+        else:
+            await ctx.send(f"Hey {ctx.author.name}!")
+
+        self.last_user = ctx.author
+
     @commands.command(name="ahhhh")
     async def test(self, ctx):
         await ctx.send("A" + "h"*random.randint(4, 40) + "!")
-        
+
     @commands.Cog.listener()
     async def on_member_join(self, member):
         channel = member.guild.system_channel
