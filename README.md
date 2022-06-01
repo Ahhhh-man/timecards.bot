@@ -12,6 +12,9 @@ pip install -U git+https://github.com/Rapptz/discord.py
 ```terminal
 pip install python-dotenv
 ```
+```terminal
+pip install flask
+```
 
 Run script.
 ```python
