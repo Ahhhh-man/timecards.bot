@@ -22,12 +22,15 @@ class Basic(commands.Cog, name='Basic module'):
     async def test(self, ctx):
         await ctx.send("A" + "h"*random.randint(4, 40) + "!")
 
-    @commands.Cog.listener()
-    async def on_member_join(self, member):
-        channel = member.guild.system_channel
-        if channel is not None:
-            await channel.send(f'A wild {member.mention} has appeared!')
+    @commands.command(name="pool")
+    async def test2(self, ctx):
+        # check if the users name is pool
+        if ctx.author.name == "pool" and random.randint(0, 1) == 1:
+            text = "Appalling"
+        else:
+            text = "P" + "o"*random.randint(2, 40) + "l!"
 
+        await ctx.send(text)
 
 async def setup(bot):
     await bot.add_cog(Basic(bot))
