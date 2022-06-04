@@ -9,10 +9,12 @@ class Admin(commands.Cog, name='Admin Commands'):
     async def purge(self, ctx, amount: int):
         await ctx.channel.purge(limit=amount)
 
-    @commands.command(name='say', hidden=True, pass_context=True)
-    async def say(ctx, *, args):
+    @commands.command(name='say')
+    @commands.is_owner()
+    async def say(self, ctx, *, message):
         await ctx.message.delete()
-        await ctx.send(''.join(args))
+        await ctx.send(message)
+    
 
 async def setup(bot):
     await bot.add_cog(Admin(bot))
