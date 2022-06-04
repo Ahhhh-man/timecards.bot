@@ -22,6 +22,9 @@ class CommandErrHandler(commands.Cog):
         elif isinstance(error, commands.MissingPermissions):
             await ctx.send('You do not have permission to do that!')
 
+        elif isinstance(error, commands.errors.CheckFailure):
+            await ctx.send(error)
+
         else:
             print('Ignoring exception in command {}:'.format(
                 ctx.command), file=sys.stderr)

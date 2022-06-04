@@ -39,9 +39,9 @@ class Timecards(commands.Cog):
         self.minute_finder.start()
 
     @commands.command(name="timecard")
+    @commands.is_owner()
     async def timecard(self, ctx):
         await self.send_timecard()
-
 
 async def setup(bot):
     await bot.add_cog(Timecards(bot))
